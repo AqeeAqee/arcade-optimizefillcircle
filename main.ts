@@ -1,4 +1,3 @@
-info.setScore(control.isUSBInitialized()?2:1)
 
 let bg=img`
 ................................................................................................................................................................
@@ -126,40 +125,51 @@ scene.setBackgroundImage(bg)
 // fillCircle(bg, 80, 60, 30, 2)
 // function fillCircle( img:Image,  cx:number,  cy:number,  r:number,  c:number) {
     let img1: Image=bg
-    let cx: number=100
-    let cy: number=60
-    let r: number=60
+    let cx: number=160
+    let cy: number=120
+    let r: number=12
     let c: number=2
+
+for(let r=1;r<120;r++){
+    info.setScore(r)
+    bg.fillCircle(cx,cy,r,5)
 
     let x = r - 1;
     let y = 0;
     let dx = 1;
     let dy = 1;
     let err = -r// dx - (r << 1);
+    let test=0;
 
     while (x >= y) {
         bg.fillRect(0,0,30,50,0)
         bg.print(err.toString(), 0, 0)
         bg.print(x.toString(), 0, 10)
         bg.print(y.toString(), 0, 20)
-        bg.print(dx.toString(), 0, 30)
-        bg.print(dy.toString(), 0, 40)
-        img1.fillRect(cx + y, cy - x, 1, 1 + (x << 1), 2);
-        img1.fillRect(cx - y, cy - x, 1, 1 + (x << 1), 4);
-        controller.pauseUntilAnyButtonIsPressed()
+        // bg.print(dx.toString(), 0, 30)
+        // bg.print(dy.toString(), 0, 40)
+        img1.fillRect(cx + y, cy - x, 1, 1 + (x << 1), c);
+        img1.fillRect(cx - y, cy - x, 1, 1 + (x << 1), c);
         if (err <= 0) {
             ++y;
             // err += dy;
             // dy += 2;
-            err += y //+1
+            err += y +1
+            test+=y+1
         } else {
-        img1.fillRect(cx + x, cy - y, 1, 1 + (y << 1), 1);
-        img1.fillRect(cx - x, cy - y, 1, 1 + (y << 1), 3);
+        img1.fillRect(cx + x, cy - y, 1, 1 + (y << 1), c);
+        img1.fillRect(cx - x, cy - y, 1, 1 + (y << 1), c);
             --x;
             // dx += 2;
             // err += dx - (r << 1);
-            err -= x //-1
+            err -= x
         }
     }
 // }
+    bg.print(test.toString(), 0, 30)
+        // controller.pauseUntilAnyButtonIsPressed()    
+    basic.pause(130)
 
+// bg.fillCircle(cx, cy, r, 6)
+// basic.pause(200)
+}
